@@ -1,0 +1,762 @@
+[11:15 pm, 24/1/2025] Sujitha: Android application to display basis information mobile application code
+[11:15 pm, 24/1/2025] Sujitha: Here's a simple Android application code to display basic information:
+
+AndroidManifest.xml
+
+<?xml version="1.0" encoding="utf-8"?>
+<manifest xmlns:android="http://schemas.android.com/apk/res/android"
+    package="com.example.basicinfo">
+
+    <application
+        android:allowBackup="true"
+        android:icon="@mipmap/ic_launcher"
+        android:label="@string/app_name"
+        android:supportsRtl="true"
+        android:theme="@style/AppTheme">
+        <activity android:name=".MainActivity">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+        </activity>
+    </application>
+
+</manifest>
+
+
+activity_main.xml
+
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical">
+
+    <TextView
+        android:id="@+id/tv_device_name"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Device Name: "
+        android:textSize="16sp" />
+
+    <TextView
+        android:id="@+id/tv_android_version"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Android Version: "
+        android:textSize="16sp" />
+
+    <TextView
+        android:id="@+id/tv_device_model"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Device Model: "
+        android:textSize="16sp" />
+
+</LinearLayout>
+
+
+MainActivity.java
+
+import android.os.Build;
+import android.support.v7.app.AppCompatActivity;
+import android.os.Bundle;
+import android.widget.TextView;
+
+public class MainActivity extends AppCompatActivity {
+
+    private TextView tvDeviceName;
+    private TextView tvAndroidVersion;
+    private TextView tvDeviceModel;
+
+    @Override
+    protected void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        setContentView(R.layout.activity_main);
+
+        tvDeviceName = findViewById(R.id.tv_device_name);
+        tvAndroidVersion = findViewById(R.id.tv_android_version);
+        tvDeviceModel = findViewById(R.id.tv_device_model);
+
+        tvDeviceName.setText("Device Name: " + Build.DEVICE);
+        tvAndroidVersion.setText("Android Version: " + Build.VERSION.RELEASE);
+        tvDeviceModel.setText("Device Model: " + Build.MODEL);
+    }
+}
+
+This code displays basic information about the device, including:
+
+1. Device Name
+2. Android Version
+3. Device Model
+
+Note: This code uses the Build class to retrieve device information.
+[11:15 pm, 24/1/2025] Sujitha: Android application ratio button mobile application code
+[11:15 pm, 24/1/2025] Sujitha: Here's an example of an Android application that uses RadioButtons:
+
+# AndroidManifest.xml
+
+<?xml version="1.0" encoding="utf-8"?>
+<manifest xmlns:android="http://schemas.android.com/apk/res/android"
+    package="com.example.radiobutton">
+
+    <application
+        android:allowBackup="true"
+        android:icon="@mipmap/ic_launcher"
+        android:label="@string/app_name"
+        android:supportsRtl="true"
+        android:theme="@style/AppTheme">
+        <activity android:name=".MainActivity">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+        </activity>
+    </application>
+
+</manifest>
+
+
+# activity_main.xml
+
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical">
+
+    <RadioGroup
+        android:id="@+id/radio_group"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content">
+
+        <RadioButton
+            android:id="@+id/radio_button1"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Option 1" />
+
+        <RadioButton
+            android:id="@+id/radio_button2"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Option 2" />
+
+        <RadioButton
+            android:id="@+id/radio_button3"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Option 3" />
+    </RadioGroup>
+
+    <Button
+        android:id="@+id/button"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Submit" />
+
+    <TextView
+        android:id="@+id/text_view"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content" />
+
+</LinearLayout>
+
+
+# MainActivity.java
+
+import android.os.Bundle;
+import android.view.View;
+import android.widget.Button;
+import android.widget.RadioButton;
+import android.widget.RadioGroup;
+import android.widget.TextView;
+
+import androidx.appcompat.app.AppCompatActivity;
+
+public class MainActivity extends AppCompatActivity {
+
+    private RadioGroup radioGroup;
+    private Button button;
+    private TextView textView;
+
+    @Override
+    protected void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        setContentView(R.layout.activity_main);
+
+        radioGroup = findViewById(R.id.radio_group);
+        button = findViewById(R.id.button);
+        textView = findViewById(R.id.text_view);
+
+        button.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                int selectedId = radioGroup.getCheckedRadioButtonId();
+                RadioButton radioButton = findViewById(selectedId);
+
+                if (radioButton != null) {
+                    textView.setText("Selected Option: " + radioButton.getText());
+                } else {
+                    textView.setText("No option selected");
+                }
+            }
+        });
+    }
+}
+
+This code creates a simple Android application with three RadioButtons and a Button. When the Button is clicked, it displays the selected RadioButton's text in a TextView.
+
+Explanation:
+1. We create a RadioGroup in the layout file (activity_main.xml) and add three RadioButtons to it.
+2. We create a Button and a TextView in the layout file.
+3. In the MainActivity.java file, we find the RadioGroup, Button, and TextView by their IDs.
+4. We set an OnClickListener for the Button. When the Button is clicked, we get the selected RadioButton's ID using radioGroup.getCheckedRadioButtonId().
+5. We find the selected RadioButton using the ID and display its text in the TextView.
+[11:15 pm, 24/1/2025] Sujitha: Develop on Android application using image button mobile application code
+[11:15 pm, 24/1/2025] Sujitha: Here's an example of an Android application that uses an ImageButton:
+
+# AndroidManifest.xml
+
+<?xml version="1.0" encoding="utf-8"?>
+<manifest xmlns:android="http://schemas.android.com/apk/res/android"
+    package="com.example.imagebutton">
+
+    <application
+        android:allowBackup="true"
+        android:icon="@mipmap/ic_launcher"
+        android:label="@string/app_name"
+        android:supportsRtl="true"
+        android:theme="@style/AppTheme">
+        <activity android:name=".MainActivity">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+        </activity>
+    </application>
+
+</manifest>
+
+
+# activity_main.xml
+
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical">
+
+    <ImageButton
+        android:id="@+id/image_button"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:src="@drawable/ic_launcher" />
+
+    <TextView
+        android:id="@+id/text_view"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content" />
+
+</LinearLayout>
+
+
+# MainActivity.java
+
+import android.os.Bundle;
+import android.view.View;
+import android.widget.ImageButton;
+import android.widget.TextView;
+
+import androidx.appcompat.app.AppCompatActivity;
+
+public class MainActivity extends AppCompatActivity {
+
+    private ImageButton imageButton;
+    private TextView textView;
+
+    @Override
+    protected void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        setContentView(R.layout.activity_main);
+
+        imageButton = findViewById(R.id.image_button);
+        textView = findViewById(R.id.text_view);
+
+        imageButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                textView.setText("ImageButton clicked!");
+            }
+        });
+    }
+}
+
+This code creates a simple Android application with an ImageButton and a TextView. When the ImageButton is clicked, it displays a message in the TextView.
+
+# Explanation
+1. We create an ImageButton in the layout file (activity_main.xml) and set its src attribute to a drawable resource.
+2. We create a TextView in the layout file to display the message.
+3. In the MainActivity.java file, we find the ImageButton and TextView by their IDs.
+4. We set an OnClickListener for the ImageButton. When the ImageButton is clicked, we display a message in the TextView.
+
+# Example Use Cases
+1. Camera app: Use an ImageButton to capture a photo.
+2. Music player: Use an ImageButton to play/pause music.
+3. Social media: Use an ImageButton to share content.
+[11:15 pm, 24/1/2025] Sujitha: Develop an Android application using for alter dialogue box mobile application code
+[11:15 pm, 24/1/2025] Sujitha: Here's an example of an Android application that uses an AlertDialog:
+
+# AndroidManifest.xml
+
+<?xml version="1.0" encoding="utf-8"?>
+<manifest xmlns:android="http://schemas.android.com/apk/res/android"
+    package="com.example.alertdialogue">
+
+    <application
+        android:allowBackup="true"
+        android:icon="@mipmap/ic_launcher"
+        android:label="@string/app_name"
+        android:supportsRtl="true"
+        android:theme="@style/AppTheme">
+        <activity android:name=".MainActivity">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+        </activity>
+    </application>
+
+</manifest>
+
+
+# activity_main.xml
+
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical">
+
+    <Button
+        android:id="@+id/button"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Show AlertDialog" />
+
+</LinearLayout>
+
+
+# MainActivity.java
+
+import android.app.AlertDialog;
+import android.app.Dialog;
+import android.content.DialogInterface;
+import android.os.Bundle;
+import android.view.View;
+import android.widget.Button;
+
+import androidx.appcompat.app.AppCompatActivity;
+
+public class MainActivity extends AppCompatActivity {
+
+    private Button button;
+
+    @Override
+    protected void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        setContentView(R.layout.activity_main);
+
+        button = findViewById(R.id.button);
+
+        button.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                showDialog();
+            }
+        });
+    }
+
+    private void showDialog() {
+        AlertDialog.Builder builder = new AlertDialog.Builder(this);
+        builder.setTitle("AlertDialog");
+        builder.setMessage("This is an AlertDialog. Do you want to continue?");
+        builder.setPositiveButton("Yes", new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialog, int which) {
+                // Yes button clicked
+            }
+        });
+        builder.setNegativeButton("No", new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialog, int which) {
+                // No button clicked
+            }
+        });
+        builder.show();
+    }
+}
+
+This code creates a simple Android application with a Button. When the Button is clicked, it shows an AlertDialog with two buttons: "Yes" and "No".
+
+# Explanation
+1. We create a Button in the layout file (activity_main.xml).
+2. In the MainActivity.java file, we find the Button by its ID and set an OnClickListener.
+3. When the Button is clicked, we call the showDialog() method.
+4. In the showDialog() method, we create an AlertDialog using the AlertDialog.Builder class.
+5. We set the title, message, and buttons for the AlertDialog.
+6. Finally, we show the AlertDialog using the show() method.
+
+# Example Use Cases
+1. Confirmation dialog: Use an AlertDialog to confirm user actions, such as deleting data.
+2. Warning dialog: Use an AlertDialog to warn users of potential issues, such as low battery.
+3. Information dialog: Use an AlertDialog to display information to users, such as instructions or tips.
+[11:15 pm, 24/1/2025] Sujitha: Develop an Android application using layout managers mobile application code
+[11:15 pm, 24/1/2025] Sujitha: Here's an example of an Android application that uses various layout managers:
+
+# AndroidManifest.xml
+
+<?xml version="1.0" encoding="utf-8"?>
+<manifest xmlns:android="http://schemas.android.com/apk/res/android"
+    package="com.example.layoutmanagers">
+
+    <application
+        android:allowBackup="true"
+        android:icon="@mipmap/ic_launcher"
+        android:label="@string/app_name"
+        android:supportsRtl="true"
+        android:theme="@style/AppTheme">
+        <activity android:name=".MainActivity">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+        </activity>
+    </application>
+
+</manifest>
+
+
+# activity_main.xml
+
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical">
+
+    <!-- LinearLayout -->
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal">
+
+        <Button
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Button 1" />
+
+        <Button
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Button 2" />
+
+        <Button
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Button 3" />
+
+    </LinearLayout>
+
+    <!-- RelativeLayout -->
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <Button
+            android:id="@+id/button4"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Button 4" />
+
+        <Button
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_toRightOf="@id/button4"
+            android:text="Button 5" />
+
+    </RelativeLayout>
+
+    <!-- TableLayout -->
+    <TableLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <TableRow>
+            <Button
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Button 6" />
+
+            <Button
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Button 7" />
+        </TableRow>
+
+        <TableRow>
+            <Button
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Button 8" />
+
+            <Button
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Button 9" />
+        </TableRow>
+
+    </TableLayout>
+
+    <!-- GridLayout -->
+    <GridLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:columnCount="2">
+
+        <Button
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Button 10" />
+
+        <Button
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Button 11" />
+
+        <Button
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Button 12" />
+
+        <Button
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Button 13" />
+
+    </GridLayout>
+
+</LinearLayout>
+
+
+# MainActivity.java
+
+import androidx.appcompat.app.AppCompatActivity;
+
+import android.os.Bundle;
+
+public class MainActivity extends AppCompatActivity {
+
+    @Override
+    protected void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        setContentView(R.layout.activity_main);
+    }
+}
+
+This code demonstrates the use of various layout managers in Android, including:
+
+1. LinearLayout: Arranges views in a linear fashion, either horizontally or vertically.
+2. RelativeLayout: Arranges views relative to each other or to the parent layout.
+3. TableLayout: Arranges views in a table format, with rows and columns.
+4. GridLayout: Arranges views in a grid format, with rows and columns.
+
+Each layout manager has its own strengths and weaknesses, and the choice of which one to use depends on the specific requirements of the application.
+
+Note that this code does not include any event handling or other functionality beyond the layout itself.
+[11:15 pm, 24/1/2025] Sujitha: Develop an Android application using linear layout vertical mobile application code
+[11:15 pm, 24/1/2025] Sujitha: Here's an example of an Android application that uses a LinearLayout with a vertical orientation:
+
+# AndroidManifest.xml
+
+<?xml version="1.0" encoding="utf-8"?>
+<manifest xmlns:android="http://schemas.android.com/apk/res/android"
+    package="com.example.linearLayout">
+
+    <application
+        android:allowBackup="true"
+        android:icon="@mipmap/ic_launcher"
+        android:label="@string/app_name"
+        android:supportsRtl="true"
+        android:theme="@style/AppTheme">
+        <activity android:name=".MainActivity">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+        </activity>
+    </application>
+
+</manifest>
+
+
+# activity_main.xml
+
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical">
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Name:"
+        android:textSize="16sp" />
+
+    <EditText
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:hint="Enter your name" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Email:"
+        android:textSize="16sp" />
+
+    <EditText
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:hint="Enter your email" />
+
+    <Button
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Submit" />
+
+</LinearLayout>
+
+
+# MainActivity.java
+
+import androidx.appcompat.app.AppCompatActivity;
+
+import android.os.Bundle;
+
+public class MainActivity extends AppCompatActivity {
+
+    @Override
+    protected void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        setContentView(R.layout.activity_main);
+    }
+}
+
+This code creates a simple Android application with a vertical LinearLayout. The layout contains two TextViews, two EditTexts, and a Button.
+
+# Explanation
+1. We create a LinearLayout in the layout file (activity_main.xml) and set its orientation to vertical.
+2. We add two TextViews, two EditTexts, and a Button to the layout.
+3. In the MainActivity.java file, we set the content view to the layout file.
+
+# Example Use Cases
+1. Registration form: Use a vertical LinearLayout to create a registration form with multiple fields.
+2. Survey: Use a vertical LinearLayout to create a survey with multiple questions.
+3. Settings screen: Use a vertical LinearLayout to create a settings screen with multiple options.
+[11:15 pm, 24/1/2025] Sujitha: Develop an Android application using linear layout horizontal mobile application code
+[11:15 pm, 24/1/2025] Sujitha: Here's an example of an Android application that uses a LinearLayout with a horizontal orientation:
+
+# AndroidManifest.xml
+
+<?xml version="1.0" encoding="utf-8"?>
+<manifest xmlns:android="http://schemas.android.com/apk/res/android"
+    package="com.example.linearLayout">
+
+    <application
+        android:allowBackup="true"
+        android:icon="@mipmap/ic_launcher"
+        android:label="@string/app_name"
+        android:supportsRtl="true"
+        android:theme="@style/AppTheme">
+        <activity android:name=".MainActivity">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+        </activity>
+    </application>
+
+</manifest>
+
+
+# activity_main.xml
+
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="horizontal">
+
+    <Button
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_weight="1"
+        android:text="Button 1" />
+
+    <Button
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_weight="1"
+        android:text="Button 2" />
+
+    <Button
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_weight="1"
+        android:text="Button 3" />
+
+</LinearLayout>
+
+
+# MainActivity.java
+
+import androidx.appcompat.app.AppCompatActivity;
+
+import android.os.Bundle;
+
+public class MainActivity extends AppCompatActivity {
+
+    @Override
+    protected void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        setContentView(R.layout.activity_main);
+    }
+}
+
+This code creates a simple Android application with a horizontal LinearLayout. The layout contains three buttons.
+
+# Explanation
+1. We create a LinearLayout in the layout file (activity_main.xml) and set its orientation to horizontal.
+2. We add three buttons to the layout and set their layout_width to 0dp.
+3. We set the layout_weight of each button to 1, so they will share the available space equally.
+4. In the MainActivity.java file, we set the content view to the layout file.
+
+# Example Use Cases
+1. Navigation bar: Use a horizontal LinearLayout to create a navigation bar with multiple buttons.
+2. Tab layout: Use a horizontal LinearLayout to create a tab layout with multiple tabs.
+3. Button group: Use a horizontal LinearLayout to create a group of buttons that share the available space.
